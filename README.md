@@ -1,3 +1,22 @@
+# Practice - Practice - React Three Fiber
+
+## Demo
+
+- [https://practice-react-three-fiber.vercel.app/](https://practice-react-three-fiber.vercel.app/)
+
+## Reference
+
+- [React Three Fiber Documentation](https://docs.pmnd.rs/react-three-fiber/)
+- [Nextjs,TypeScriptで3Dを表示 react-three-fiber](https://zenn.dev/jun0723/articles/188834ae228d8f)
+- [React-Three-Fiverを用いてReactで3D表現する \#初心者 - Qiita](https://qiita.com/watataku8911/items/687b0609e0739cd1ad4f)
+
+---
+
+Below is the default README
+
+---
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

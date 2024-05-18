@@ -4,6 +4,7 @@ function App() {
   return (
     <div>
       <h1>Practice - React Three Fiber</h1>
+      <h2>Official</h2>
       <ul>
         <li>
           <Link href="/your-first-scene">Your first scene</Link>
@@ -11,6 +12,9 @@ function App() {
         <li>
           <Link href="/materials">Materials</Link>
         </li>
+      </ul>
+      <h2>Qiita</h2>
+      <ul>
         <li>
           <Link href="/watataku">watataku</Link>
         </li>
