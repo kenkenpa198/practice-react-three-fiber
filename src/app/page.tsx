@@ -1,95 +1,67 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { Canvas } from "@react-three/fiber";
+
+function App() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <div id="canvas-container">
+      {/**
+       * Canvas: レンダリングを行うためのセットアップを行う
+       *
+       * - レンダリングに必要な基本的な構成要素であるシーンとカメラをセットアップする
+       * - フレームごとにシーンをレンダリングするため、従来のレンダリングループ (animate 関数のことかな) は不要
+       *
+       * Canvas は親ノードに合わせて応答するため、親の幅と高さを変更することでサイズを制御できる
+       * この場合は #canvas-container に合わせる
+       * */}
+      <Canvas>
+        {/**
+         * Fiber コンポーネント (キャメルケースのもの) にプロパティを設定すると
+         * three.js インスタンスに同じ名前のプロパティが設定される
+         *
+         * つまり下記の記述は……
+         *
+         * ```ts
+         * <ambientLight intensity={0.1} />
+         * ```
+         *
+         * バニラな three.js でいう次のインスタンスへ値を設定したものと同等。
+         *
+         * ```js
+         * const light = new THREE.AmbientLight()
+         * light.intensity = 0.1
+         * ```
+         *
+         * .set() を元の three.js で使用していた場合は短く書けるらしい
+         * https://docs.pmnd.rs/react-three-fiber/getting-started/your-first-scene#shortcuts
+         *
+         */}
+        <ambientLight intensity={0.1} />
+        <directionalLight color="red" position={[0, 0, 5]} />
+        {/**
+         * mesh: three.js の基本的なシーンオブジェクト
+         *
+         * 3D 空間で計上を表現するために必要なジオメトリ (形状) とマテリアル (素材) を保持するために使用される。
+         * BoxGeometry と MeshStandardmaterial を使用して、親に自動的にアタッチされる新しいメッシュを作成する。
+         */}
+        <mesh>
+          {/**
+           * boxGeometry: 形状を定義する
+           *
+           * バニラな three.js でいう次の記述と等価。
+           *
+           * ```js
+           * const geometory = new THREE.BoxGeometry(1, 1, 1);
+           * ```
+           *
+           * 引数を変更する度にオブジェクトを再構築する必要がある。
+           */}
+          <boxGeometry args={[2, 2, 2]} />
+          <meshStandardMaterial />
+        </mesh>
+      </Canvas>
+    </div>
   );
 }
+
+export default App;
